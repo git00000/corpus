@@ -1,0 +1,75 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" >
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token }}">
+        <title>tal uvs</title>
+        
+        <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+    </head>
+    <body {% block body_class %}class=""{% endblock %}>
+
+        {% block header_block %}
+
+                        {% if request.user.is_authenticated and not request.user.is_admin %}
+
+                        <v-list-item @click="goTo('{% url 'user:profile' %}')">
+                            <v-list-item-content>
+                                <v-list-item-title>Tâches</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+
+                        {% elif request.user.is_admin %} <!-- The request user is authenticated and is admin-->
+
+                        <v-list-item @click="goTo('{% url 'myadmin:import-export' %}')">
+                            <v-list-item-content>
+                                <v-list-item-title>Imort/Export</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+
+                        <v-list-item @click="goTo('{% url 'myadmin:languages' %}')">
+                            <v-list-item-content>
+                                <v-list-item-title>Languages</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+
+
+                        <v-list-item @click="goTo('{% url 'myadmin:users' %}')">
+                            <v-list-item-content>
+                                <v-list-item-title>Utilisateurs</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+
+
+                        <v-list-item @click="goTo('{% url 'myadmin:tasks' %}')">
+                            <v-list-item-content>
+                                <v-list-item-title>Tâches</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                        {% endif %}
+
+                        <v-list-item @click="goTo('{% url 'accounts:logout' %}')">
+                            <v-list-item-content>
+                                <v-list-item-title>Se déconnecter</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                        
+        {% endblock header_block%}
+
+        {% block content %}{% endblock%}
+
+    
+        
+        {% block javascript %}
+            <script>{% include 'default/main.js' %}</script>
+        {% endblock javascript %}
+
+
+
+        
+    </body>
+</html>

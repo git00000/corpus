@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+
+
+{% block header_block %}<!-- empting the header content for login page -->{% endblock %}
+{% block content %}
+    <div id="login-app-container">
+        <v-app>
+            <v-sheet>
+                <v-container>
+                {% comment 'default_login_form_commented' %}{{ form }}{% endcomment %}
+          
+                    <form method="post" class="mx-auto" style="max-width: 500px">
+                        {% csrf_token %} 
+                        <div>
+                            <v-row>
+                                <v-col
+                                cols="12"
+                                md="12"
+                                >
+                                    <v-text-field
+                                    label="E-mail"
+                                    name="email"
+                                    type="email"
+                                    value="{{ form.email.value|default_if_none:"" }}"
+                                    required
+                                    ></v-text-field>
+                                </v-col>
+
+                                <v-col
+                                cols="12"
+                                md="12"
+                                >
+                                  <v-text-field
+                                    :append-icon="show_password ? 'visibility' : 'visibility_off'"
+                                    :type=" show_password ? 'text' : 'password'"
+                                    name="password"
+                                    label="Mot de passe"
+                                    @click:append="show_password = !show_password"
+                                  ></v-text-field>
+
+                                </v-col>
+
+                            </v-row>
+                        </div>
+                        
+                        
+                        <div>
+                            <v-btn class="float-right" color="primary" type="submit">Connexion</v-btn>
+                        </div>
+                    </form>
+                </v-container>
+            </v-sheet>
+
+        </v-app>
+    </div>
+{% endblock %}
+    
+{% block javascript %}
+    <script>{% include 'accounts/login.js' %}</script>
+{% endblock javascript %}
+

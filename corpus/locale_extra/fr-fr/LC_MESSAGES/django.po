@@ -1,0 +1,5 @@
+msgid "Username"
+msgstr "E-mail"
+
+msgid "Nom d'utilisateur"
+msgstr "E-mail"
